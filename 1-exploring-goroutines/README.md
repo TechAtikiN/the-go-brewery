@@ -1,7 +1,7 @@
 # Exploring Goroutines in Go 🏗️
-Goroutines are Go's fundamental building blocks for concurrent programming, allowing multiple pieces of logic to execute simultaneously while providing elegant communication mechanisms between them. 
+**Goroutines** are Go's fundamental building blocks for **concurrent programming**, allowing multiple pieces of logic to execute simultaneously while providing elegant communication mechanisms between them. 
 
-In programming, when we need to handle multiple operations at once, we typically talk about two concepts: concurrency and parallelism. Let’s explore what each means.
+In programming, when we need to handle multiple operations at once, we typically talk about two concepts: **Concurrency** and **Parallelism**. Let’s explore what each means.
 
 ## What is Concurrency? 
 - In a concurrent world, we're going to have **one stream of execution**, but we're going to have multiple tasks that are being executed at the same time. 
@@ -19,7 +19,7 @@ In programming, when we need to handle multiple operations at once, we typically
 - Parallelism is about **doing lots of things at once** by running tasks simultaneously on multiple processors or cores.
 - Go is designed for concurrency and can leverage parallelism when available hardware resources allows it.
 
-## What is a `goroutine`? 🔀
+## What is a goroutine? 🔀
 - A `goroutine` is a **lightweight thread** managed by the Go runtime. It allows us to run functions concurrently, meaning that multiple functions can run at the same time without blocking each other.
 - Goroutines are created using the `go` keyword followed by a function call. For example:
 	```go
@@ -29,7 +29,7 @@ In programming, when we need to handle multiple operations at once, we typically
 - Goroutines are lightweight because they are **managed by the Go runtime**, which means that we don't have to worry about managing them ourselves. 
 
 
-## How does a `goroutine` work? 📊
+## How does a goroutine work? 📊
 - Since goroutines are spinning out separate processes, that means they are performing multiple tasks at the same time, or they are running concurrently.
 	```mermaid
 	gantt
@@ -46,17 +46,17 @@ In programming, when we need to handle multiple operations at once, we typically
 		Goroutine 3      :g3, 1, 6
 	```
 
-- When we come across a `goroutine` in the main function, it's going to spin out a separate process from the main process, everything else will continue to run in the main process. When we encounter another `goroutine`, it will spin out another process, and so on. But when the **main process terminates, all the goroutines will also end**. 
+- When we come across a `goroutine`, it's going to spin out a separate process from the main process, everything else will continue to run in the main process. When we encounter another `goroutine`, it will spin out another process, and so on. But when the **main process terminates, all the goroutines will also end**. 
 - So, if we want to keep the main process running until all goroutines have finished executing, we need to have a blocking mechanism to wait for all the goroutines to finish.
 - We'll see soon about how we can achieve this blocking mechanism using **`WaitGroup`**.
 
 
-## What is `WaitGroup`? ⏳
+## What is WaitGroup? ⏳
 - **`WaitGroup`** is a way for us to **block the main process* until all goroutines have finished executing. 
 - Think of it like an internal counter that keeps track of the number of goroutines that are currently running. When the `WaitGroup` counter reaches zero, it means that all goroutines have finished executing. 
 - `WaitGroup` is part of the sync package in Go, and it provides a simple way to **synchronize goroutines**.
 
-### Methods of `WaitGroup`: ⚙️
+### Methods of WaitGroup ⚙️
 - **Add(n int)**: increments the `WaitGroup` counter by n.
 - **Done()**: decrements the `WaitGroup` counter by 1.
 - **Wait()**: blocks until the `WaitGroup` counter is zero.
@@ -68,7 +68,7 @@ In programming, when we need to handle multiple operations at once, we typically
 > - It is commonly used with `WaitGroup` to ensure that the _Done()_ method is called when the `goroutine` finishes executing, even if an error occurs. This way, we can ensure that the `WaitGroup` counter is decremented correctly and the main process can exit safely.
 
 
-### How does `WaitGroup` work? 
+### How does WaitGroup work? 
 - When we create a `WaitGroup`, it starts with a counter of zero. 
 	```go
 	wg := sync.WaitGroup{}
@@ -87,7 +87,7 @@ In programming, when we need to handle multiple operations at once, we typically
 	wg.Wait()
 	```
 
-## Example of using goroutines and `WaitGroup` 
+## Example of using goroutines and WaitGroup 
 ```go
 func main() {
 	var wg sync.WaitGroup 
@@ -136,7 +136,7 @@ All goroutines finished executing
 ```
 
 ## TL;DR: 🤝	
-- Goroutines are lightweight "threads" managed by the Go runtime and they are created using the `go` keyword.
-- Concurrency is about managing multiple tasks and switching between them, while parallelism is about running multiple tasks simultaneously on different CPU cores.
-- Goroutines can communicate with each other using channels.
+- `Goroutines` are lightweight "threads" managed by the Go runtime and they are created using the `go` keyword.
+- Concurrency is about **managing multiple tasks** and switching between them, while parallelism is about **running multiple tasks simultaneously** on different CPU cores.
+- `Goroutines` can communicate with each other using channels.
 - `WaitGroup` is a way to synchronize goroutines and ensure that they finish executing before the main process exits.
