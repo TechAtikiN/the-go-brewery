@@ -5,10 +5,10 @@ Gin is a popular **Go framework** that’s fast and efficient—making it a grea
 ## About `Gin` 🍸
 `Gin` is a **lightweight**, **high-performance** web framework built on Go's standard net/http package. Here’s why Gin stands out:
 - **Speed & Simplicity**: Gin has blazing-fast performance since it's built on top of the standard Go HTTP server and has minimal overhead. 
-- **Routing**: Gin provides a powerful routing system that handles complex URLs, path parameters effortlessly.
-- **Middleware**: Gin allows you to plug in middleware for logging, authentication, rate limiting etc, with seamless integration in your app.
-- **JSON**: Gin supports JSON parsing and generation out of the box, making it easy to work with JSON data. JSON is quite a common pattern in RESTful APIs and Gin provides convenient ways to handle it.
-- **Scalability & Concurrency**: Gin leverages Go's concurrency model (goroutines) to handle concurrent requests efficiently and scale applications horizontally to manage heavy load on the server.
+- **Routing**: It provides a powerful routing system that handles complex URLs, path parameters effortlessly.
+- **Middleware**: It allows you to plug in middleware for logging, authentication, rate limiting etc, with seamless integration in your app.
+- **JSON**: It supports JSON parsing and generation out of the box, making it easy to work with JSON data. JSON is quite a common pattern in RESTful APIs and Gin provides convenient ways to handle it.
+- **Scalability & Concurrency**: It leverages Go's concurrency model (goroutines) to handle concurrent requests efficiently and scale applications horizontally to manage heavy load on the server.
 
 ## Specific to Gin~
 - **`gin.Default()`**: Creates a new Gin router with default middleware (logging and recovery). The recovery middleware catches panics and returns a 500 error, ensuring your server stays running.
@@ -16,7 +16,7 @@ Gin is a popular **Go framework** that’s fast and efficient—making it a grea
 - **`context.Param(key)`**: Retrieves path parameters (e.g. :id in /todos/:id).
 - **`context.Query(key)`**: Extracts query parameters from the URL (e.g., ?query=example).
 - **`router.Run(address)`**: Starts the HTTP server on the specified address (e.g., localhost:8080).
-- **`route.[HTTPMethod](path, handler)`**: Defines a route for a specific HTTP method and path. For example, router.GET("/todos", getTodos).
+- **`router.[HTTPMethod](path, handler)`**: Defines a route for a specific HTTP method and path. For example, router.GET("/todos", getTodos).
 
 ## Creating HTTP Server using Gin 🚀
  
@@ -197,7 +197,7 @@ curl -X POST http://localhost:8080/todos -H "Content-Type: application/json" -d 
 
 #### To check the **Update** and **Delete** endpoints, you can refer to the [complete code](./main.go) for this example.
 
-### Request Handling - Behind the Scenes 🎬
+## Request Handling - Behind the Scenes 🎬
 ```mermaid
 sequenceDiagram
     participant C as Client
@@ -221,9 +221,9 @@ sequenceDiagram
 
 ## TL;DR:
 - Gin is a **popular web framework** for Go that provides a simple and efficient way to build web applications.
-- Gin is built on top of the **standard Go HTTP server** and provides a powerful routing system that handles complex URLs, path parameters effortlessly.
-- Gin provides a robust **middleware** system that allows to easily build features like logging, authentication, rate limiting into the request-response cycle.
+- It is built on top of the **standard Go HTTP server** and provides a powerful routing system that handles complex URLs, path parameters effortlessly.
+- It provides a robust **middleware** system that allows to easily build features like logging, authentication, rate limiting into the request-response cycle.
 - Gin supports **JSON parsing** and generation out of the box, making it easy to work with JSON data. JSON is quite common pattern in RESTful APIs and Gin provides convenient ways to handle it.
-- Gin leverages Go's concurrency model (goroutines) to handle concurrent requests efficiently and scale applications horizontally to manage high traffic loads.
+- It leverages Go's concurrency model (goroutines) to handle concurrent requests efficiently and scale applications horizontally to manage high traffic loads.
 - The example provided demonstrates how to create a **simple RESTful API using Gin** to manage a list of todos in memory, with endpoints for retrieving, adding, updating, and deleting todos.
 - Learn more about Gin from the [Documentation](https://gin-gonic.com/en/docs/).
