@@ -3,25 +3,27 @@
 Gin is a popular **Go framework** that’s fast and efficient—making it a great choice for building **scalable web applications**. It's simple and easy to use, making the code not look magic but rather straightforward.
 
 ## About `Gin` 🍸
-`Gin` is a **lightweight**, **high-performance** web framework built on Go's standard net/http package. Here’s why Gin stands out:
-- **Speed & Simplicity**: Gin has blazing-fast performance since it's built on top of the standard Go HTTP server and has minimal overhead. 
-- **Routing**: It provides a powerful routing system that handles complex URLs, path parameters effortlessly.
-- **Middleware**: It allows you to plug in middleware for logging, authentication, rate limiting etc, with seamless integration in your app.
-- **JSON**: It supports JSON parsing and generation out of the box, making it easy to work with JSON data. JSON is quite a common pattern in RESTful APIs and Gin provides convenient ways to handle it.
-- **Scalability & Concurrency**: It leverages Go's concurrency model (goroutines) to handle concurrent requests efficiently and scale applications horizontally to manage heavy load on the server.
+- It's lightweight, highly performant, and easy to use.
+- It's built on top of the standard Go's net/http package.
+- It's fast because it has minimal overhead.
+- Out of the box support for JSON parsing and generation makes it easy to work with JSON data.
+- Building on top of middleware is straightforward, allowing you to add features like logging, authentication, and more.
 
 ## Specific to Gin~
-- **`gin.Default()`**: Creates a new Gin router with default middleware (logging and recovery). The recovery middleware catches panics and returns a 500 error, ensuring your server stays running.
+- **`gin.Default()`**: Creates a new Gin router with default middleware (logging and recovery).
+    > The recovery middleware catches panics and returns a 500 error, ensuring your server stays running.
 - **`context.BindJSON(&struct)`**: Binds incoming JSON request bodies to a Go struct, with automatic validation and error handling.
 - **`context.Param(key)`**: Retrieves path parameters (e.g. :id in /todos/:id).
 - **`context.Query(key)`**: Extracts query parameters from the URL (e.g., ?query=example).
 - **`router.Run(address)`**: Starts the HTTP server on the specified address (e.g., localhost:8080).
 - **`router.[HTTPMethod](path, handler)`**: Defines a route for a specific HTTP method and path. For example, router.GET("/todos", getTodos).
 
-## Creating HTTP Server using Gin 🚀
+## Creating your first server with Gin 🚀
  
-### 1. Setup project <br/>
+### 1. Setup project
+
 We’ll build a RESTful API to manage a todo list stored in memory. The API will support the following endpoints:
+
 - **GET /todos**: Retrieve all todos, with optional filtering by query or status.
 - **POST /todos**: Create a new todo
 - **GET /todos/:id**: Retrieve a specific todo by its ID
@@ -34,11 +36,15 @@ Before writing code, ensure you have Go installed on your system.
 Create a new directory for your project, initialize a Go module, and install the Gin package. 
 
 ```bash
-mkdir todo-api
-cd todo-api
-go mod init todo-api
-go get github.com/gin-gonic/gin
+~ $ mkdir todo-api
+
+~ $ cd todo-api
+
+~/todo-api $ go mod init todo-api
+
+~/todo-api $ go get github.com/gin-gonic/gin
 ```
+
 > This sets up a Go module named todo-api and installs the Gin framework.
 
 ### 2. Getting Gin up and running
@@ -54,27 +60,31 @@ import (
 
 func main() {
     router := gin.Default()
+
     router.GET("/todos", func(c *gin.Context) {
         c.IndentedJSON(http.StatusOK, gin.H{"message": "Hello, World!"})
     })
-    router.Run("localhost:8080")
+
+    router.Run("localhost:8080") // This starts the server on port 8080 locally
 }
 ```
 
 Run the server using the following command:
 
 ```bash
-go run main.go
+~/todo-api $ go run main.go
 ```
 
 Open your browser and navigate to http://localhost:8080/todos. You should see the following output:
 
 ```json
 {
-"message": "Hello, World!"
+    "message": "Hello, World!"
 }
 ```
-> This confirms that Gin is set up correctly. The `gin.Default()` function initializes the router with logging and recovery middleware, and router.Run starts the server.
+> This confirms that Gin is set up correctly!
+>
+> The `gin.Default()` function initializes the router with logging and recovery middleware, and router. Run starts the server.
 
 ### 3. Define the Todo Model and In-Memory Store
 
@@ -130,31 +140,14 @@ This endpoint retrieves all todos, with optional filtering by a query (search te
 
 ```go
 func getTodos(context *gin.Context) {
-    query := context.Query("query")
-    status := context.Query("status")
-
     var filtered []Todo
-
-    for _, todo := range TODOS {
-        // Match query if provided
-        if query != "" && !containsIgnoreCase(todo.Item, query) {
-            continue
-        }
-
-        // Match status if provided
-        if status == "true" && !todo.Completed {
-            continue
-        }
-        if status == "false" && todo.Completed {
-            continue
-        }
-
-        filtered = append(filtered, todo)
-    }
+    
+    // Filter by query parameters logic here
 
     context.IndentedJSON(http.StatusOK, filtered)
 }
 ```
+> The `getTodos()` function retrieves all todos from the TODOS slice and returns them as a JSON response. To get todos based on a query or status, you can add logic to filter the todos based on the query parameters. Refer to the [example](./main.go) implemented in the complete code.
 
 #### 5.2 GET /todos/:id
 This endpoint retrieves a specific todo by its ID.
@@ -195,7 +188,7 @@ Test with curl
 curl -X POST http://localhost:8080/todos -H "Content-Type: application/json" -d '{"id":"3","item":"Test API","completed":false}'
 ```
 
-#### To check the **Update** and **Delete** endpoints, you can refer to the [complete code](./main.go) for this example.
+#### To check the **Update** and **Delete** endpoints, you can refer to the [complete code](./main.go).
 
 ## Request Handling - Behind the Scenes 🎬
 ```mermaid
