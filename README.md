@@ -1,5 +1,7 @@
 # Welcome to the **Go Brewery!** 🤟  
-This repository contains basic to advance concepts in and around Go that I've documented while learning and building with Go. Happy Learning!
+This repository contains basic to advance concepts in and around Go that I've documented while learning and building with Go. 
+
+Happy Learning!
 
 ---
 
