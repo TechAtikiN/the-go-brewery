@@ -13,7 +13,7 @@ Imagine Youtube app without concurrency 🚩
 1. You click on a video to play, and the video starts buffering...
 2. While the video is buffering, the entire UI freezes
 3. You cannot scroll, pause, see comments, or interact in any way
-4. Only after the video finishes loading does the app let you interact again (Boy, that would be frustrating!)
+4. Only after the video finishes loading, does the app let you interact again (Boy, that would be frustrating!)
 
 So if we are on the same boat, it's a good time to learn about **concurrency** and how it can help us build **better**, **responsive** and **fast** applications.
 
@@ -52,8 +52,8 @@ When tasks actually run simultaneously on different CPU cores or processors, tha
 ## Concurrency patterns in Go 📐
 
 As the complexity and concurrency requirements of the application increases, we need to follow certain patterns to manage the concurrency effectively and identify potential bugs.
-
 For this, it's recommended to follow some well-known concurrency patterns.
+
 Few of the recognized concurrency patterns in Go are~
 
 ### 1. Worker Pool Pattern
@@ -72,7 +72,7 @@ This pattern is essential when you need to:
 
 ### 3. Pipeline Pattern
 
-In this pattern, data flows through a series of stages, each represented by a goroutine connected by channels. Each stage:
+In this pattern, data flows through a series of stages, each represented by a goroutine connected by channels. Each stage
 
 - Receives data from an input channel
 - Performs its specific transformation
@@ -99,7 +99,6 @@ Check out [Go Concurrency Patterns](https://go.dev/talks/2012/concurrency.slide#
 ## Race conditions 🏁
 
 Race conditions occur when multiple goroutines access shared data at the same time while at least one of them is modifying it.
-
 The outcome of this can be unpredictable and difficult to debug.
 
 We can use the `-race` flag while running or testing our Go code to detect race conditions.
@@ -109,7 +108,7 @@ We can use the `-race` flag while running or testing our Go code to detect race 
   go test -race
 ```
 
-This is helpful in identifying potential race conditions during development and testing phases. It's highly recommended and helps in writing safe concurrent code.
+This is helpful in identifying potential race conditions during development and testing phases. It's highly recommended and helps in writing **safe concurrent code**.
 
 ## Concurrency Implementation 🚧
 
@@ -202,7 +201,7 @@ func main() {
 
 > P.S: When running concurrently, the **output order** is **not guaranteed** because goroutines execute independently and may complete at different times.
 
-## "Handle with care": Concurrency pitfalls ⚠️
+## "Handle with care": Concurrency Pitfalls ⚠️
 
 - **Goroutine leaks:** When goroutines are not properly terminated and continue to run in the background, consuming resources. This can happen if they are blocked on a channel that is never written to or read from, or if they enter an infinite loop.
 - **Deadlocks:** When using unbuffered channels, if two or more goroutines are waiting for each other to send or receive data, they can get stuck in a deadlock situation where none of them can proceed.
@@ -213,9 +212,10 @@ To avoid these pitfalls, it's important to carefully design and test concurrent 
 
 > P.S Do not use concurrency unless it's really necessary!
 
-## Conclusion 📝
+## TL;DR
 
 - `Concurrency` is a powerful feature of Go that allows us to build responsive, fast and performant applications.
 - `Goroutines` and `channels` are at the core of Go's concurrency model.
 - More than understanding the concepts, it's important to know the pitfalls and best practices while working with concurrency.
 - Using `concurrency patterns` can help in managing complexity and writing safe concurrent code.
+- Test your concurrent code with the `-race` flag to identify potential race conditions early in the development process.
