@@ -49,7 +49,7 @@ When tasks actually run simultaneously on different CPU cores or processors, tha
 - Goroutines can send and receive values through channels and they let the goroutines be aware of each other's state.
 - Learn more about channels in the previous [blog](../2-exploring-channels/README.md)
 
-## Concurrency patterns in Go 📐
+## Concurrency Patterns in Go 📐
 
 As the complexity and concurrency requirements of the application increases, we need to follow certain patterns to manage the concurrency effectively and identify potential bugs.
 For this, it's recommended to follow some well-known concurrency patterns.
@@ -98,7 +98,7 @@ Check out [Go Concurrency Patterns](https://go.dev/talks/2012/concurrency.slide#
 
 ## Race conditions 🏁
 
-Race conditions occur when multiple goroutines access shared data at the same time while at least one of them is modifying it.
+Race conditions occur when multiple goroutines access shared data at the same time, while at least one of them is modifying it.
 The outcome of this can be unpredictable and difficult to debug.
 
 We can use the `-race` flag while running or testing our Go code to detect race conditions.
@@ -205,7 +205,7 @@ func main() {
 
 - **Goroutine leaks:** When goroutines are not properly terminated and continue to run in the background, consuming resources. This can happen if they are blocked on a channel that is never written to or read from, or if they enter an infinite loop.
 - **Deadlocks:** When using unbuffered channels, if two or more goroutines are waiting for each other to send or receive data, they can get stuck in a deadlock situation where none of them can proceed.
-- **Race conditions:** When multiple goroutines access shared data simultaneously without ensuring proper synchronization, leading to unpredictable behavior.
+- **Race conditions:** When multiple goroutines access shared data simultaneously without ensuring proper synchronization, it leads to unpredictable behavior.
 - **Not waiting for goroutines to finish:** If the main goroutine exits before other goroutines have completed their work, those goroutines will be terminated prematurely.
 
 To avoid these pitfalls, it's important to carefully design and test concurrent code, and to use synchronization mechanisms correctly.
